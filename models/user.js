@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
 
-  User.Booking = User.hasMany(Booking);
+  
 
   return User;
 }
