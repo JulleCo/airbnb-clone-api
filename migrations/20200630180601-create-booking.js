@@ -16,19 +16,9 @@ module.exports = {
       },
       idUser: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'User',
-          key: 'id',
-        },
       },
       idPlace: {
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Place',
-        //   key: 'id',
-        // },
-        // onUpdate: 'cascade',
-        // onDelete: 'cascade',
       },
       createdAt: {
         allowNull: false,
