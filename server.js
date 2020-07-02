@@ -1,13 +1,14 @@
-/* eslint-disable no-console */
-/* eslint-disable eol-last */
 const express = require('express');
-require('dotenv').config();
+// require('dotenv').config();
 const router = require('./routes');
+const morgan = require('morgan');
 
 const server = express();
 server.use('/api', router);
 
-const port = 3000;
+server.use(morgan('dev'))
+
+const port = 8000;
 
 server.listen(port, () => {
   console.log(`Serveur demarre dans le port ${port}`);
