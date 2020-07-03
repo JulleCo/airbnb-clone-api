@@ -9,16 +9,28 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       firstName: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       lastName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      email: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       password: {
-        type: Sequelize.TEXT,
+        allowNull: false,
+        type: Sequelize.STRING,
       },
-      firstRegistration: {
-        type: Sequelize.DATE,
+      // firstRegistration: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE,
+      // },
+      role:{
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
