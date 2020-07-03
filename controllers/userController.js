@@ -1,7 +1,9 @@
 const models = require('../models');
-const AuthJWT = require('jsonwebtoken');
+const jwtUtils = require('../utils/jwt.utils');
 const bcrypt = require('bcrypt');
 // const { Json } = require('sequelize/types/lib/utils');
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ; 
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/ ;
 
 module.exports = {
   signup: (request, response) => {
@@ -14,8 +16,8 @@ module.exports = {
         };
 
         // ---- erreur 400 ----
-        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ; 
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/ ;
+        // const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ; 
+        // const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/ ;
 
         for (const key in user) {
             if (user[key] == null) {
@@ -78,17 +80,40 @@ module.exports = {
             email: request.body.email,
             password: request.body.password
         };
+
+        for (const key in user) {
+            if (user[key] == null) {
+                return response.status(400).json({'error': `Le champs ${key} n'est pas rempli`});
+            }
+        }
         models.User.findOne({
-            attributes: ['email', 'password'],
-            where: { email: user.email, password: user.password },
+            where: { email: user.email},
         })
             .then((isMatch) => {
                 if(isMatch) {
-
+                    bcrypt.compare(user.password, isMatch.password, (error, resBcrypt)=>{
+                        if(resBcrypt){
+                            return response.status(200).json({
+                                token: jwtUtils.generateTokenForUser(isMatch),
+                                user: {
+                                    role: isMatch.role,
+                                    firstName: isMatch.firstName,
+                                    lastName: isMatch.lastName,
+                                    email: isMatch.email,
+                                }
+                            })
+                        }
+                        else{
+                            return response.status(401).json({'error':"password incorrect"})
+                        }
+                    })
                 }
+                else{
+                    return response.status(404).json({'error':"ce compte n'existe pas encore"})
+                }  
             })
             .catch((error) => {
-                return response.status(409).json({'error': 'email or password not matche'})
+                return response.status(500).json({'error': "Impossible de vérifier l'utilisateur-ice" })
             })
     }
 }
