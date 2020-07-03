@@ -1,16 +1,16 @@
 const models = require('../models');
-const AuthJWT = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const AuthJWT = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 // const { Json } = require('sequelize/types/lib/utils');
 
-module.exports =  {
-    signup : (request, response) => {
-        const user = {
+module.exports = {
+  signup: (request, response) => {
+    const user = {
             firstName: request.body.firstName,
             lastName: request.body.lastName, 
             email: request.body.email,
             password: request.body.password,
-            role: request.body.role
+            role: request.body.role,
         };
 
         // ---- erreur 400 ----
