@@ -75,28 +75,20 @@ module.exports =  {
     
     signin: (request, response) => {
         const user = {
-
+            email: request.body.email,
+            password: request.body.password
         };
-
-        // for (const key in user) {
-        //     if (user[key] == null) {
-        //         return response.status(400).json({'error': `Le champs ${key} n'est pas rempli`});
-        //     }
-        // }
-
-        // if (email == null || password == null) {
-        //     return res.status(400).json({ error: 'missing parameters' });
-        //   }
-
         models.User.findOne({
-            attributes: ['email'],
-            where: { email: user.email },
+            attributes: ['email', 'password'],
+            where: { email: user.email, password: user.password },
         })
-            .then(() => {
+            .then((isMatch) => {
+                if(isMatch) {
 
+                }
             })
             .catch((error) => {
-
+                return response.status(409).json({'error': 'email or password not matche'})
             })
     }
 }
