@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-// const userRoute = require('./userRoute');
+// ----- routes model USER
 const userController = require('../controllers/userController');
-
 router.post('/signup', userController.signup);
+router.post('/signin', userController.signin);
 
+// ----- routes model PLACE
+const placeController = require('../controllers/placeController')
+// router.post('/places', placeController.)
 
+// ----- route HOME
 router.get('/', (req, res) => {
   res.json({message: 'Hello World'});
 });
@@ -17,8 +21,5 @@ router.use('*', (req, res) => {
     error: "Oupsy, you'r lost in wonderland !",
   });
 });
-
-
-// router.use(userRoute);
 
 module.exports = router;
