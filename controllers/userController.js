@@ -37,7 +37,7 @@ module.exports =  {
         //     return response.status(400).json({'error': "Il manque des info !"});
         // }
         
-// ---- si tous les champs sont rempli correctement : ok ou deja existant
+        // ---- si tous les champs sont rempli correctement : ok ou deja existant
         models.User.findOne({
             attributes: ['email'],
             where: { email: user.email },
@@ -71,13 +71,32 @@ module.exports =  {
             .catch((error) => {
                 return response.status(500).json({'error': "Impossible de vérifier l'utilisateur-ice" })
             })      
-    }, 
+    },
     
     signin: (request, response) => {
+        const user = {
+
+        };
+
+        // for (const key in user) {
+        //     if (user[key] == null) {
+        //         return response.status(400).json({'error': `Le champs ${key} n'est pas rempli`});
+        //     }
+        // }
+
+        // if (email == null || password == null) {
+        //     return res.status(400).json({ error: 'missing parameters' });
+        //   }
 
         models.User.findOne({
             attributes: ['email'],
             where: { email: user.email },
         })
+            .then(() => {
+
+            })
+            .catch((error) => {
+
+            })
     }
- }
+}
