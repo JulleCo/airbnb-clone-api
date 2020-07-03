@@ -1,5 +1,4 @@
 const express = require('express');
-// require('dotenv').config();
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 
@@ -12,11 +11,11 @@ server.use(morgan('dev'))
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
+
 //appel des routes
 server.use('/api', router);
 
 // choix et ecoute du port
-
 const port = 8000;
 
 server.listen(port, () => {
