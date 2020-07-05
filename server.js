@@ -16,7 +16,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use('/api', router);
 
 // choix et ecoute du port
-const port = 8000;
+const port = 8001;
 
 server.listen(port, () => {
   console.log(`Serveur demarre dans le port ${port}`);
