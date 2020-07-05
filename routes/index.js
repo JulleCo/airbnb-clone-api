@@ -7,8 +7,8 @@ router.post('/signup', userController.signup);
 router.post('/signin', userController.signin);
 
 // ----- routes model PLACE
-const placeController = require('../controllers/placeController')
-// router.post('/places', placeController.)
+const placeController = require('../controllers/placeController');
+router.post('/places', placeController.addPlace);
 
 // ----- route HOME
 router.get('/', (req, res) => {
