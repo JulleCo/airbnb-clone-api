@@ -4,31 +4,33 @@ const jwtUtils = require('../utils/jwt.utils');
 
 module.exports =  {
     addPlace: (request, response) => {
+        console.log("#0")
         const place = {
-            // cityId : request.body.cityId,
+            idCity : request.body.idCity,
             name: request.body.name,
             description: request.body.description,
             rooms: request.body.rooms,
             bathrooms: request.body.bathrooms,
             maxGuests: request.body.maxGuests,
             priceByNight: request.body.priceByNight,
-            // available: array (date ISO 8601 string / UTC)
         };
 
         console.log(place.description)    
 
         const headerAuth = request.headers['authorization'];
         const userId = jwtUtils.getUserId(headerAuth, response);
-        // var userRole = jwtUtils.getUserRole(headerAuth);
+        const role = jwtUtils.getUserRole(headerAuth);
 
         if (userId < 0) {
             console.log("#6", userId)
-            return response.status(401).json({'error': 'Connectez vous pour accéder à cette fonctionnalité 2'})
+            return response.status(401).json({'error': 'Connectez vous pour accéder à cette fonctionnalité'})
         }
 
-        // if (userRole !== host){
-        //     return response.status(403).json({'error': "Vous n'avez pas les droits pour ajouter une fiche"})
-        // }
+        if (role !== 'host'){
+            console.log("#7,5", role)
+            return response.status(403).json({'error': "Vous n'avez pas les droits pour ajouter une fiche"})
+        }
+        console.log("#12", role)
 
         for (const key in place) {
             if (place[key] == null) {
@@ -43,18 +45,22 @@ module.exports =  {
             where: { name: place.name },
         })
             .then((placeFound) => {
+                console.log("#13", placeFound)
                 if(!placeFound){
+                    console.log("#14", placeFound)
+                    console.log("#14,5", place.name)
                     const newPlace = models.Places.create({
-                        // cityId : place.cityId,
+                        idCity : place.idCity,
                         name: place.name,
                         description: place.description,
                         rooms: place.rooms,
                         bathrooms: place.bathrooms,
                         maxGuests: place.maxGuests,
                         priceByNight: place.priceByNight
-                        // available: ,
                     })
-                    .then((newPlace) => {
+                    .then((newPlace)=>{
+                        console.log("#14,8", place.name)
+                        console.log("#15", newPlace)
                         return response.status(201).json({
                             // id: ,
                             // city: ,
@@ -64,10 +70,10 @@ module.exports =  {
                             bathrooms: newPlace.bathrooms,
                             maxGuests: newPlace.maxGuests,
                             priceByNight: newPlace.priceByNight
-                            // available: ,
                         })
                     })
                     .catch((error) => {
+                        console.log("#15,5", newPlace)
                         return response.status(500).json({ 'error' : "Impossible d'ajouter cette fiche"})
                     })
                 } else{

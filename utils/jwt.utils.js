@@ -12,7 +12,7 @@ module.exports = {
     },
     JWT_SIGN_SECRET,
     {
-      expiresIn: '1h'
+      expiresIn: '4h'
     })
   },
 
@@ -29,59 +29,44 @@ module.exports = {
 
     if(token) {
       console.log("#3", token)
-
-    //   try {
-    //     const jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
-    //     console.log("#4", jwtToken)
-    //     if (!jwtToken) {
-    //       return response.status(401).json({
-    //         error: 'Token null lors de la verification! ❌',
-    //       });
-    //     }
-    //     console.log("#4,5", jwtToken.userId)
-
-    //   userId = jwtToken.userId;
-    //   } catch (e) {
-    //     if (e instanceof jwt.JsonWebTokenError) {
-    //       return response.status(401).json({
-    //         error: 'Token invalide lors de la verification! ❌',
-    //       });
-    //     }
-    //   }
-    // }
-
-
       try {
         const jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
-        console.log("#3,4", jwtToken)
+        console.log("#3,5", jwtToken)
         if(!jwtToken) {
           console.log("#4", token)
-          return response.status(401).json({error : "il y a un probleme"})
+          return response.status(401).json({error : "Problème: pour accéder au jwtToken"})
         }
         console.log("#4,5", userId)
         userId = jwtToken.userId;
       }
-      // catch(err) { }
       catch (err) {
-        return response.status(401).json({error : 'Connectez vous pour accéder à cette fonctionnalité'})
+        return response.status(401).json({error : 'Problème : le token est invalide'})
       }   
     }
     console.log("#5", userId)
-
     return userId;
   }, 
 
-  // getUserRole : function(authorization) {
-  //   const role = host ;
-  //   const token = module.exports.parseAuthorization(authorization);
-  //   if(token != null) {
-  //     try {
-  //       var jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
-  //       if(jwtToken != null)
-  //         userRole = jwtToken.role;
-  //     } catch(err) { }
-  //       // catch(error) {"Vous n'avez pas les droits pour ajouter une fiche"}
-  //   }
-  //   return role;
-  // }
+  getUserRole : function(authorization) {
+    let role = null ;
+    const token = module.exports.parseAuthorization(authorization);
+    console.log("#7", role, token)
+    if(token) {
+      console.log("#8", role)
+      try {
+        const jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
+        console.log("#9", jwtToken)
+        if(!jwtToken) {
+          console.log("#10", jwtToken)
+          return response.status(401).json({error : "Problème: pour accéder au jwtToken"})
+        }
+        role = jwtToken.role;
+      }
+      catch (err) {
+        return response.status(401).json({error : 'Problème : le token est invalide'})
+      } 
+    }
+    console.log("#11", role)
+    return role;
+  }
 }
