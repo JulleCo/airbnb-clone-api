@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 // const { Json } = require('sequelize/types/lib/utils');
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ; 
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/ ;
+// const letterRegex = /^[A-Za-z]+$/
 
 module.exports = {
   signup: (request, response) => {
@@ -15,7 +16,8 @@ module.exports = {
             role: request.body.role,
         };
 
-        // ---- erreur 400 ----
+        // -------- erreur 400 ----
+
         // const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ; 
         // const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/ ;
 
@@ -25,7 +27,7 @@ module.exports = {
             }
         }
 
-        // ----- ajouter condition "doit etre une chaine de caractère"
+        // ajouter condition "doit etre une chaine de caractère"
         if (emailRegex.test(user.email) == false){
             return response.status(400).json({'error': "Email non valide"})
         }
@@ -35,9 +37,6 @@ module.exports = {
         if (user.role !== ('host' || 'tourist')){
             return response.status(400).json({'error' : "Veuillez choisir votre mode d'utilisation"})
         }
-        // if (user.lastName == null || user.firstName == null) {
-        //     return response.status(400).json({'error': "Il manque des info !"});
-        // }
         
         // ---- si tous les champs sont rempli correctement : ok ou deja existant
         models.User.findOne({
@@ -86,6 +85,7 @@ module.exports = {
                 return response.status(400).json({'error': `Le champs ${key} n'est pas rempli`});
             }
         }
+
         models.User.findOne({
             where: { email: user.email},
         })
