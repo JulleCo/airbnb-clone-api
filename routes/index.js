@@ -10,9 +10,15 @@ router.post('/signin', userController.signin);
 const placeController = require('../controllers/placeController');
 router.post('/places', placeController.addPlace);
 
+// ----- route Cities
+const cityController = require('../controllers/cityController');
+router.get('/cities', cityController.getCities);
+
 // ----- route HOME
 router.get('/', (req, res) => {
-  res.json({message: 'Hello World'});
+  res.json({
+    message: 'Hello World'
+  });
 });
 
 // Gestion des erreurs

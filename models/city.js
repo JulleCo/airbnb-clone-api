@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  city.init({
-    name: DataTypes.STRING
+  City.init({
+    name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'City',
