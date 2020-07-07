@@ -11,11 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Places.belongsTo(models.City, {
+        foreignKey: {
+          name: 'idCity',
+        },
+      }),
+      models.Places.belongsTo(models.User, {
+        foreignKey: {
+          name: 'idUser',
+        },
+      })
+
     }
   };
   Places.init({
     idCity: DataTypes.INTEGER,
-    // idUser: DataTypes.INTEGER,
+    idUser: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     rooms: DataTypes.INTEGER,

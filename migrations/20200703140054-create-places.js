@@ -11,14 +11,19 @@ module.exports = {
       idCity: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: 'Cities',
-        //   key: 'id',
-        // },
+        references: {
+          model: 'Cities',
+          key: 'id',
+        },
       },
-      // idUser: {
-      //   type: Sequelize.INTEGER
-      // },
+      idUser: {
+        allowNull: false,
+        type: Sequelize.INTEGER, 
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING
