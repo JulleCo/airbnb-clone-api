@@ -10,6 +10,7 @@ router.post('/signin', userController.signin);
 const placeController = require('../controllers/placeController');
 router.post('/places', placeController.addPlace);
 router.get('/places', placeController.getPlaces);
+router.get('/places/:id', placeController.getPlaceById);
 
 // ----- route Cities
 const cityController = require('../controllers/cityController');

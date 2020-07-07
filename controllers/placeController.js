@@ -113,5 +113,32 @@ module.exports = {
                     'error': "Impossible d'afficher les fiches"
                 })
             })
+    },
+
+    getPlaceById: (request, response) => {
+        console.log('ok');       
+        models.Places.findOne({
+            attributes : ['id', 'idCity', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight'],
+            // where : {id : request.params.id},
+        })     
+        .then((foundPlaceById) => {
+            if (foundPlaceById) {
+                console.log(foundPlaceById);
+                console.log(foundPlaceById.name);
+                return response.status(201).json({ 
+                    id: foundPlaceById.id,
+                    name: foundPlaceById.name,
+                    description: foundPlaceById.description,
+                    rooms: foundPlaceById.rooms,
+                    bathrooms: foundPlaceById.bathrooms,
+                    maxGuests: foundPlaceById.maxGuests,
+                    priceByNight: foundPlaceById.priceByNight,
+                    })
+                }
+        })
+        .catch((error) =>{
+            
+            return response.status(404).json({'error': "La ressource demandée n'existe pas"})      
+        })
     }
 }
