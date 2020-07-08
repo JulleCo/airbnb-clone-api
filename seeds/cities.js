@@ -59,6 +59,14 @@ module.exports = () => {
         {
           "id": 15,
           "name": "Metz"
-        }
+        }, 
+        {
+          "id": 16,
+          "name": "Bogota"
+        }, 
+        {
+          "id": 17,
+          "name": "Moon"
+        },
     ];
 };
