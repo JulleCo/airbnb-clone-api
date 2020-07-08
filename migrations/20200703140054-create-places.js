@@ -48,6 +48,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      imageOne: {
+        allowNull: true,
+        type: Sequelize.TEXT
+      },
+      imageTwo: {
+        allowNull: true,
+        type: Sequelize.TEXT
+      },
+      imageThree: {
+        allowNull: true,
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),

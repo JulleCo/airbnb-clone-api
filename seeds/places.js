@@ -1,36 +1,147 @@
 module.exports = () => {
     return [{
             "id": 1,
-            "idCity": 1,
+            "idCity": 5,
             "idUser": 1,
-            "name": "Mon bel appart",
-            "description": "Un bel appart confortable au coeur de Bruxelles",
+            "name": "Appartement coquet",
+            "description": "Un bel appart confortable au coeur de Marseille.",
             "rooms": 2,
             "bathrooms": 1,
-            "maxGuests": 3,
-            "priceByNight": 59
+            "maxGuests": 4,
+            "priceByNight": 80, 
+            "imageOne": "https://www.lucyinteriordesign.com/images-portfolio/scandinavian_modern/01.jpg"
         },
         {
             "id": 2,
-            "idCity": 7,
+            "idCity": 1,
             "idUser": 1,
             "name": "Mon beau studio",
-            "description": "Un petit studio dans le centre historique de Dijon",
+            "description": "Un petit studio dans le centre historique de Paris.",
             "rooms": 1,
             "bathrooms": 1,
             "maxGuests": 2,
-            "priceByNight": 35
+            "priceByNight": 100, 
+            "imageOne": "https://static.cotemaison.fr/medias_11942/w_1815,h_1362,c_crop,x_51,y_0/w_640,h_358,c_fill,g_center/v1582206789/petit-appartement-parisien-haut-en-couleur-tons-vert-et-roses_6114651.jpg"
         },
         {
             "id": 3,
             "idCity": 17,
             "idUser": 2,
             "name": "Milkyway",
-            "description": "View on meteor all day long",
+            "description": "View on meteor all day long.",
             "rooms": 1,
             "bathrooms": 1,
             "maxGuests": 50,
-            "priceByNight": 3500
+            "priceByNight": 3500, 
+            "imageOne": "https://www.sloft-magazine.com/wp-content/uploads/2017/12/La-vue-sur-le-salon-750x500.jpg"
+        },
+        {
+            "id": 4,
+            "idCity": 16,
+            "idUser": 4,
+            "name": "Lindo habitación",
+            "description": "Bel appartement refait récemment.",
+            "rooms": 3,
+            "bathrooms": 3,
+            "maxGuests": 10,
+            "priceByNight": 200, 
+            "imageOne":"https://www.planete-deco.fr/wp-content/uploads/2020/04/TE0.jpg"
+        },
+        {
+            "id": 5,
+            "idCity": 13,
+            "idUser": 3,
+            "name": "Maison lumineuse",
+            "description": "Intérieur lumineux et moderne, idéal pour séjourner au calme.",
+            "rooms": 2,
+            "bathrooms": 1,
+            "maxGuests": 5,
+            "priceByNight": 100, 
+            "imageOne":"https://designmag.fr/wp-content/uploads/2015/12/appartement-deco-design-interieur.jpg"
+        },
+        {
+            "id": 6,
+            "idCity": 1,
+            "idUser": 2,
+            "name": "Studio sous les toits",
+            "description": "Le charme parisien à son comble, sous les combles…",
+            "rooms": 1,
+            "bathrooms": 1,
+            "maxGuests": 3,
+            "priceByNight": 100, 
+            "imageOne":"https://www.book-a-flat.com/photo/paris/9557/salon1.jpg"
+        },
+        {
+            "id": 7,
+            "idCity": 2,
+            "idUser": 1,
+            "name": "Appartement moderne",
+            "description": "Refait à neuf et avec style, pour les amateurs de design c'est l'appartement contemporain idéal.",
+            "rooms": 4,
+            "bathrooms": 3,
+            "maxGuests": 10,
+            "priceByNight": 500, 
+            "imageOne": "https://maison1.advcdn.net/images/medias/000/043/000043464/660.jpg"
+        },
+        {
+            "id": 8,
+            "idCity": 5,
+            "idUser": 5,
+            "name": "Grand loft lumineux",
+            "description": "Notre loft familial est très agréable à vivre, vous vous y sentirez comme chez vous.",
+            "rooms": 1,
+            "bathrooms": 1,
+            "maxGuests": 6,
+            "priceByNight": 200, 
+            "imageOne": "https://resize-elle.ladmedia.fr/rcrop/638,,forcex/img/var/plain_site/storage/images/deco/news-tendances/deco-quoi-de-neuf/88511882-1-fre-FR/Deco-Quoi-de-neuf.jpg"
+        },
+        {
+            "id": 9,
+            "idCity": 5,
+            "idUser": 5,
+            "name": "Petit pied à terre calme",
+            "description": "Ce petit appartement est confortable et ressourçant.",
+            "rooms": 2 ,
+            "bathrooms": 1,
+            "maxGuests": 3,
+            "priceByNight": 90, 
+            "imageOne": "https://www.turbulences-deco.fr/wp-content/uploads/2018/02/fantastic-Frank_VASASTAN-NORRMALM_1-745x497.jpg"
+        },
+        {
+            "id": 10,
+            "idCity": 1,
+            "idUser": 1,
+            "name": "Appartement convivial",
+            "description": "Cocon familial idéalement situé, proche ligne de métro 3.",
+            "rooms": 3,
+            "bathrooms": 2,
+            "maxGuests": 7,
+            "priceByNight": 200, 
+            "imageOne": "https://assets.afcdn.com/story/20191226/2036083_w980h638c1cx1440cy750cxt0cyt0cxb2880cyb1500.jpg"
+        },
+        {
+            "id": 11,
+            "idCity": 1,
+            "idUser": 1,
+            "name": "Appartement contemporain",
+            "description": "Refait à neuf il y a quelques mois, idéal pour séjourner ou abriter des réunions.",
+            "rooms": 3,
+            "bathrooms": 2,
+            "maxGuests": 10,
+            "priceByNight": 300, 
+            "imageOne": "https://www.carre-habitat.com/sites/default/files/styles/image_text_paragraph/public/2019-08/cuisine-maison-minimaliste_0.jpg?itok=bHMAUO__"
+        },
+        {
+            "id": 12,
+            "idCity": 1,
+            "idUser": 2,
+            "name": "Appartement minimaliste",
+            "description": "Venez vivre une experience minimaliste et éco-responsable!.",
+            "rooms": 1,
+            "bathrooms": 1,
+            "maxGuests": 4,
+            "priceByNight": 110, 
+            "imageOne": "https://latelier-azimute.fr/wp-content/uploads/2015/12/appartement-style-japonais-13-e1415866824494.jpg"
         },
     ];
 };
