@@ -54,7 +54,6 @@ module.exports = {
                 where: {
                     name: place.name, 
                 }, 
-                // include: models.City, 
             })
             .then((placeFound) => {
                 console.log("#13", placeFound)
@@ -149,29 +148,48 @@ module.exports = {
     },
 
     getPlaceById: (request, response) => {
-        console.log('ok');       
-        models.Places.findOne({
-            attributes : ['id', 'idCity', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight'],
-            // where : {id : request.params.id},
+        console.log('ok');
+
+        const foundPlaceById = models.Places.findOne({
+            attributes : ['id', 'idCity', 'idUser', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight'],
+            where : {
+                id : request.params.id
+            },
         })     
         .then((foundPlaceById) => {
             if (foundPlaceById) {
-                console.log(foundPlaceById);
-                console.log(foundPlaceById.name);
-                return response.status(201).json({ 
-                    id: foundPlaceById.id,
-                    name: foundPlaceById.name,
-                    description: foundPlaceById.description,
-                    rooms: foundPlaceById.rooms,
-                    bathrooms: foundPlaceById.bathrooms,
-                    maxGuests: foundPlaceById.maxGuests,
-                    priceByNight: foundPlaceById.priceByNight,
-                    })
-                }
+                console.log("#23",foundPlaceById);
+                console.log("#24",foundPlaceById.name);
+
+                const nameUserFound = models.User.findOne({
+                    attributes: ['firstName'],
+                    where: {
+                        id: foundPlaceById.idUser
+                    }, 
+                })
+                .then((nameUserFound)=> {
+                    console.log("#25", nameUserFound)
+                    console.log("#26", nameUserFound.name)
+                
+                    return response.status(201).json({ 
+                        id: foundPlaceById.id,
+                        userName: nameUserFound.firstName,
+                        name: foundPlaceById.name,
+                        description: foundPlaceById.description,
+                        rooms: foundPlaceById.rooms,
+                        bathrooms: foundPlaceById.bathrooms,
+                        maxGuests: foundPlaceById.maxGuests,
+                        priceByNight: foundPlaceById.priceByNight,
+                    })   
+                })
+                .catch((error) => {
+                    console.log(error)
+                    return response.status(500).json({'error': "Le nom de l'hôte n'est identifié"})
+                })
+            }    
         })
         .catch((error) =>{
-            
-            return response.status(404).json({'error': "La ressource demandée n'existe pas"})      
+            return response.status(500).json({'error': "La ressource demandée n'existe pas"})      
         })
     }
 }
