@@ -7,13 +7,14 @@ module.exports = {
         console.log("#0")
         const place = {
             idCity: request.body.idCity,
-            idUser: request.body.idUser,
+            // idUser: userId,
             name: request.body.name,
             description: request.body.description,
             rooms: request.body.rooms,
             bathrooms: request.body.bathrooms,
             maxGuests: request.body.maxGuests,
             priceByNight: request.body.priceByNight,
+            imageOne : request.body.imageOne,
         };
 
         console.log(place.description)
@@ -51,46 +52,74 @@ module.exports = {
         models.Places.findOne({
                 attributes: ['name'],
                 where: {
-                    name: place.name
-                },
+                    name: place.name, 
+                }, 
+                // include: models.City, 
             })
             .then((placeFound) => {
                 console.log("#13", placeFound)
+
                 if (!placeFound) {
                     console.log("#14", placeFound)
                     console.log("#14,5", place.name)
+
+                    const headerAuth = request.headers['authorization'];
+                    const userId = jwtUtils.getUserId(headerAuth, response);
+
                     const newPlace = models.Places.create({
                             idCity: place.idCity,
-                            idUser: place.idUser,
+                            idUser: userId,
                             name: place.name,
                             description: place.description,
                             rooms: place.rooms,
                             bathrooms: place.bathrooms,
                             maxGuests: place.maxGuests,
-                            priceByNight: place.priceByNight
+                            priceByNight: place.priceByNight, 
+                            imageOne : place.imageOne
                         })
+
                         .then((newPlace) => {
-                            console.log("#14,8", place.name)
-                            // console.log("#15", newPlace)
-                            return response.status(201).json({
-                                // id: ,
-                                // city: ,
-                                name: newPlace.name,
-                                description: newPlace.description,
-                                rooms: newPlace.rooms,
-                                bathrooms: newPlace.bathrooms,
-                                maxGuests: newPlace.maxGuests,
-                                priceByNight: newPlace.priceByNight
+                            console.log("#14,7", place.name)
+                            console.log("#15", newPlace)
+
+                            const nameCityFound = models.City.findOne({
+                                attributes: ['name'],
+                                where: {
+                                    id: request.body.idCity
+                                }, 
+                            })
+                            .then((nameCityFound)=> {
+                                console.log("#15,1", nameCityFound)
+                                console.log("#15,2", nameCityFound.name)
+
+                                return response.status(201).json({
+                                    idUser: newPlace.idUser,
+                                    idCity: newPlace.idCity,
+                                    cityName: nameCityFound.name,
+                                    name: newPlace.name,
+                                    description: newPlace.description,
+                                    rooms: newPlace.rooms,
+                                    bathrooms: newPlace.bathrooms,
+                                    maxGuests: newPlace.maxGuests,
+                                    priceByNight: newPlace.priceByNight,
+                                    imageOne : newPlace.imageOne,
+                                })
+                            })
+                            .catch((error)=> {
+                                return response.status(500).json({
+                                    'error': "Impossible de relier cette fiche à une ville"
+                                })
                             })
                         })
                         .catch((error) => {
                             console.log("#15,5", newPlace)
-                            // console.log(error)
+                            console.log(error)
                             return response.status(500).json({
                                 'error': "Impossible d'ajouter cette fiche"
                             })
                         })
-                } else {
+                } 
+                else {
                     return response.status(409).json({
                         'error': 'Place déjà référencée dans la base de donnée!'
                     })
