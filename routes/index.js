@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authRoleMdw = require('../middleware/roleMiddleware')
 
 // ----- routes model USER
 const userController = require('../controllers/userController');
@@ -8,7 +9,8 @@ router.post('/signin', userController.signin);
 
 // ----- routes model PLACE
 const placeController = require('../controllers/placeController');
-router.post('/places', placeController.addPlace);
+router.post('/places', authRoleMdw, placeController.addPlace);
+
 router.get('/places', placeController.getPlaces);
 router.get('/places/:id', placeController.getPlaceById);
 

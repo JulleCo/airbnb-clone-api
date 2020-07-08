@@ -24,20 +24,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      // firstRegistration: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE,
-      // },
       role:{
         allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
+        defaultValue: Sequelize.literal('NOW()'),
         type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
+        defaultValue: Sequelize.literal('NOW()'),
         type: Sequelize.DATE,
       },
     });

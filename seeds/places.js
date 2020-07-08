@@ -1,23 +1,36 @@
 module.exports = () => {
     return [{
-            "idCity": 42,
-            "city": "Bruxelles",
+            "id": 1,
+            "idCity": 1,
+            "idUser": 1,
             "name": "Mon bel appart",
             "description": "Un bel appart confortable au coeur de Bruxelles",
             "rooms": 2,
             "bathrooms": 1,
-            "max_guests": 3,
-            "price_by_night": 59
+            "maxGuests": 3,
+            "priceByNight": 59
         },
         {
-            "idCity": 69,
-            "city": "Dijon",
+            "id": 2,
+            "idCity": 7,
+            "idUser": 1,
             "name": "Mon beau studio",
             "description": "Un petit studio dans le centre historique de Dijon",
             "rooms": 1,
             "bathrooms": 1,
-            "max_guests": 2,
-            "price_by_night": 35
+            "maxGuests": 2,
+            "priceByNight": 35
+        },
+        {
+            "id": 3,
+            "idCity": 17,
+            "idUser": 2,
+            "name": "Milkyway",
+            "description": "View on meteor all day long",
+            "rooms": 1,
+            "bathrooms": 1,
+            "maxGuests": 50,
+            "priceByNight": 3500
         },
     ];
 };
