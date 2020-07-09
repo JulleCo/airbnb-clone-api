@@ -133,14 +133,14 @@ module.exports = {
     getPlaces: (request, response) => {
         console.log("#20")
         models.Places.findAll({
-                attributes: ['name'],
+                attributes: ['name', 'id'],
             })
             .then((placesFound) => {
                 console.log("#21")
                 return response.status(200).json(placesFound)
             })
             .catch((error) => {
-                console.log("#22")
+                console.log("#22", error)
                 return response.status(500).json({
                     'error': "Impossible d'afficher les fiches"
                 })
