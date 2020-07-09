@@ -178,6 +178,9 @@ module.exports = {
                         bathrooms: foundPlaceById.bathrooms,
                         maxGuests: foundPlaceById.maxGuests,
                         priceByNight: foundPlaceById.priceByNight,
+                        imageOne : foundPlaceById.imageOne,
+                        imageTwo: foundPlaceById.imageTwo,
+                        imageThree: foundPlaceById.imageThree,
                     })   
                 })
                 .catch((error) => {
