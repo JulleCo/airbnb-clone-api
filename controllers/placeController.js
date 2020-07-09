@@ -132,11 +132,9 @@ module.exports = {
     },
     getPlaces: (request, response) => {
         console.log("#20")
-        models.Places.findAll({
-                attributes: ['name', 'id'],
-            })
+        models.Places.findAll({attributes: ['id', 'idCity', 'idUser', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight', 'imageOne', 'imageTwo', 'imageThree']})
             .then((placesFound) => {
-                console.log("#21")
+                console.log("#21", placesFound)
                 return response.status(200).json(placesFound)
             })
             .catch((error) => {
@@ -151,7 +149,7 @@ module.exports = {
         console.log('ok');
 
         const foundPlaceById = models.Places.findOne({
-            attributes : ['id', 'idCity', 'idUser', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight'],
+            attributes : ['id', 'idCity', 'idUser', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight', 'imageOne', 'imageTwo', 'imageThree'],
             where : {
                 id : request.params.id
             },
