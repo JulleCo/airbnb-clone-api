@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
+const cors = require('cors')
 
 const router = require('./routes');
 
@@ -10,6 +11,7 @@ server.use(morgan('dev'))
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
+server.use(cors())
 
 
 //appel des routes
