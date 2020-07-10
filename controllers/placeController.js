@@ -130,19 +130,66 @@ module.exports = {
                 })
             })
     },
+
     getPlaces: (request, response) => {
-        console.log("#20")
-        models.Places.findAll({attributes: ['id', 'idCity', 'idUser', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight', 'imageOne', 'imageTwo', 'imageThree']})
-            .then((placesFound) => {
-                console.log("#21", placesFound)
-                return response.status(200).json(placesFound)
-            })
-            .catch((error) => {
-                console.log("#22", error)
+        console.log("#20", request.query.city)
+        if(request.query.city){
+            const matchCity = models.City.findOne({
+                attributes: ['id'],
+                where: { name: request.query.city },
+           }) 
+           .then((matchCity)=> {
+                console.log("#20,5", matchCity)
+                
+                models.Places.findAll({
+                    attributes: [
+                        'id', 
+                        'idCity', 
+                        'idUser', 
+                        'name', 
+                        'description', 
+                        'rooms', 
+                        'bathrooms', 
+                        'maxGuests', 
+                        'priceByNight', 
+                        'imageOne', 
+                        'imageTwo', 
+                        'imageThree',
+                    ],
+                    where:{ 
+                        idCity: matchCity.id
+                    },
+                })
+                .then((placeFoundByCity) => {
+                    console.log("#21", placeFoundByCity)
+                    return response.status(200).json(placeFoundByCity)
+                })
+                .catch((error) => {
+                    console.log("#22", error)
+                    return response.status(500).json({
+                        'error': "Impossible d'afficher les fiches"
+                    })
+                })
+           })
+           .catch((error) => {
                 return response.status(500).json({
-                    'error': "Impossible d'afficher les fiches"
+                    'error' : "Pas de ville à matcher"
                 })
             })
+        } 
+        else {
+            models.Places.findAll({attributes: ['id', 'idCity', 'idUser', 'name', 'description', 'rooms', 'bathrooms', 'maxGuests', 'priceByNight', 'imageOne', 'imageTwo', 'imageThree']})
+                .then((placesFound) => {
+                    console.log("#21", placesFound)
+                    return response.status(200).json(placesFound)
+                })
+                .catch((error) => {
+                    console.log("#22", error)
+                    return response.status(500).json({
+                        'error': "Impossible d'afficher les fiches"
+                    })
+                })
+        }
     },
 
     getPlaceById: (request, response) => {
@@ -184,13 +231,17 @@ module.exports = {
                     })   
                 })
                 .catch((error) => {
-                    console.log(error)
+                    console.log("#27",error)
                     return response.status(500).json({'error': "Le nom de l'hôte n'est identifié"})
                 })
             }    
         })
         .catch((error) =>{
+            console.log("#destrucs", error)
             return response.status(500).json({'error': "La ressource demandée n'existe pas"})      
         })
-    }
+    }, 
 }
+
+
+
