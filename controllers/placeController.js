@@ -144,7 +144,7 @@ module.exports = {
                 models.Places.findAll({
                     attributes: [
                         'id', 
-                        'idCity', 
+                        'idCity',
                         'idUser', 
                         'name', 
                         'description', 
